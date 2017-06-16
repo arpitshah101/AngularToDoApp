@@ -4,11 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node dist/server.js",
-    "build": "tsc --project server && ng build",
+    "start": "node ./dist/server.js",
+    "build": "tsc --project ./server && ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-server": "tsc --project ./server",
+    "lint-server": "tslint --project ./server"
   },
   "private": true,
   "dependencies": {
@@ -28,7 +30,7 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.1.1",
+    "@angular/cli": "^1.1.2",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/language-service": "^4.0.0",
     "@types/jasmine": "2.5.45",
@@ -45,6 +47,6 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "^2.3.4"
   }
 }
