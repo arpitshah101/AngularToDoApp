@@ -1,31 +1,36 @@
-// const express = require('express');
-// const path = require('path');
-// const http = require('http');
-// const bodyParser = require('body-parser');
-
 import * as express from 'express';
 import * as path from 'path';
 import * as http from 'http';
 import * as bodyParser from 'body-parser';
-
+import * as cookieParser from 'cookie-parser';
 import * as Bluebird from 'bluebird';
 import * as mongoose from 'mongoose';
+import * as jwt from 'jsonwebtoken';
 
 import { TaskManager } from './modules/taskManager';
-import { TaskRoutes } from './routes/tasks';
+import { AuthRoutes, TaskRoutes } from './routes';
 
 (<any>mongoose).Promise = Bluebird;
 mongoose.connect('mongodb://localhost/todo-app').then(
-    () => {},
+    () => { },
     (err) => {
         console.error(err);
     });
 
+global.Promise = Bluebird;
+
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser('TEST'));
 
+app.use((req: express.Request, res: express.Response, next: () => void) => {
+    res.removeHeader('X-Powered-By');
+    next();
+});
+
+app.use('/auth/', AuthRoutes);
 app.use('/api/', TaskRoutes);
 app.use(express.static(path.resolve(__dirname, 'public')));
 
