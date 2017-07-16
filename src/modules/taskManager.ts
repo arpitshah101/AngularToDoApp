@@ -7,21 +7,6 @@ export class TaskManager {
 
     private static db = mongoose.connection;
 
-    // public static initDb() {
-    //     this.db.on('error', console.error.bind(console, 'connection errror'));
-    //     this.db.once('open', () => {
-    //         console.log(`We're connected!`);
-    //     });
-    // }
-
-    // public static insertKitten(name: string) {
-    //     const cat = new Kitten({
-    //         name: name
-    //     });
-
-    //     cat.save();
-    // }
-
     public static addTask(name: string) {
         // console.log(this.db.readyState);
         console.log(`Adding new task`);
