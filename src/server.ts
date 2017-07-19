@@ -35,7 +35,7 @@ app.use('/api', TaskRoutes);
 app.use('/users', UserRoutes);
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-app.get('/', (req, res) => {
+app.get('/', (req: express.Request, res: express.Response) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
