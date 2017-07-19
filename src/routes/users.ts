@@ -1,12 +1,12 @@
 import * as Promise from 'bluebird';
 import { Request, Response, Router } from 'express';
 
-import { AuthManager } from '../modules';
+import { UserManager } from '../modules';
 
 const router = Router();
 
 router.get('/', (req: Request, res: Response, next: () => void) => {
-    AuthManager.getAllUsers()
+    UserManager.getAllUsers()
         .then(users => {
             res.json(users.map(value => value.username));
         })
@@ -28,7 +28,7 @@ router.post('/', (req: Request, res: Response, next: () => void) => {
         res.send('Insufficient information to create a new user.');
         next();
     } else {
-        AuthManager.addUser(username, password, email)
+        UserManager.addUser(username, password, email)
             .then(user => {
                 res.status(201);
                 res.json(user);

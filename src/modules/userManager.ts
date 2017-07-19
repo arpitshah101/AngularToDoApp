@@ -6,7 +6,7 @@ import { IUserModel, UserModel } from '../models';
 
 const saltRounds = 10;
 
-export class AuthManager {
+export class UserManager {
 
     private static db = mongoose.connection;
 

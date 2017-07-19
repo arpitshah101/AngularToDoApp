@@ -2,7 +2,7 @@ import * as Promise from 'bluebird';
 import { Request, Response, Router } from 'express';
 import * as jwt from 'jsonwebtoken';
 
-import { AuthManager } from '../modules';
+import { UserManager } from '../modules';
 
 const router = Router();
 
@@ -15,7 +15,7 @@ router.post('/login', (req: Request, res: Response, next: () => void) => {
         res.send('Insufficient information to authenticate the user.');
         next();
     } else {
-        AuthManager.checkPassword(username, password)
+        UserManager.checkPassword(username, password)
             .then((valid: boolean) => {
                 if (valid) {
                     const token = jwt.sign({ 'username': username }, 'test', {
