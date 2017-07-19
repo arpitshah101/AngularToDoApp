@@ -8,7 +8,7 @@ import * as mongoose from 'mongoose';
 import * as jwt from 'jsonwebtoken';
 
 import { TaskManager } from './modules/taskManager';
-import { AuthRoutes, TaskRoutes } from './routes';
+import { AuthRoutes, TaskRoutes, UserRoutes } from './routes';
 
 (<any>mongoose).Promise = Bluebird;
 mongoose.connect('mongodb://localhost/todo-app').then(
@@ -30,8 +30,9 @@ app.use((req: express.Request, res: express.Response, next: () => void) => {
     next();
 });
 
-app.use('/auth/', AuthRoutes);
-app.use('/api/', TaskRoutes);
+app.use('/auth', AuthRoutes);
+app.use('/api', TaskRoutes);
+app.use('/users', UserRoutes);
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.get('/', (req, res) => {

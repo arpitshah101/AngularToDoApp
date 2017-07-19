@@ -1,2 +1,2 @@
-export * from './authManager';
 export * from './taskManager';
+export * from './userManager';
