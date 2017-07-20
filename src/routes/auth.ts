@@ -4,6 +4,8 @@ import * as jwt from 'jsonwebtoken';
 
 import { UserManager } from '../modules';
 
+import { config } from '../config';
+
 const router = Router();
 
 router.post('/login', (req: Request, res: Response, next: () => void) => {
@@ -18,7 +20,7 @@ router.post('/login', (req: Request, res: Response, next: () => void) => {
         UserManager.checkPassword(username, password)
             .then((valid: boolean) => {
                 if (valid) {
-                    const token = jwt.sign({ 'username': username }, 'test', {
+                    const token = jwt.sign({ 'username': username }, config.secret, {
                         algorithm: 'HS256',
                         expiresIn: '30d',
                     });

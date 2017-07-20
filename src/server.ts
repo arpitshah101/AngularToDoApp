@@ -10,6 +10,8 @@ import * as jwt from 'jsonwebtoken';
 import { TaskManager } from './modules/taskManager';
 import { AuthRoutes, TaskRoutes, UserRoutes } from './routes';
 
+import { config } from './config';
+
 (<any>mongoose).Promise = Bluebird;
 mongoose.connect('mongodb://localhost/todo-app').then(
     () => { },
@@ -23,7 +25,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser('TEST'));
+app.use(cookieParser(config.secret));
 
 app.use((req: express.Request, res: express.Response, next: () => void) => {
     res.removeHeader('X-Powered-By');
@@ -39,7 +41,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-const port = process.env.PORT || '3000';
+const port = config.server.port;
 app.set('port', port);
 
 const server = http.createServer(app);
