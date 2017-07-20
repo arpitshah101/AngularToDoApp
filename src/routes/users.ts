@@ -2,10 +2,11 @@ import * as Promise from 'bluebird';
 import { Request, Response, Router } from 'express';
 
 import { UserManager } from '../modules';
+import { verifyAuthentication } from './common-util';
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response, next: () => void) => {
+router.get('/', verifyAuthentication, (req: Request, res: Response, next: () => void) => {
     UserManager.getAllUsers()
         .then(users => {
             res.json(users.map(value => value.username));
@@ -17,7 +18,7 @@ router.get('/', (req: Request, res: Response, next: () => void) => {
         .finally(next);
 });
 
-router.post('/', (req: Request, res: Response, next: () => void) => {
+router.post('/', verifyAuthentication, (req: Request, res: Response, next: () => void) => {
     // validation
     const username: string = req.body.username;
     const password: string = req.body.password;
