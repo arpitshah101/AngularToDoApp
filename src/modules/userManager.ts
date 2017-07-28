@@ -32,7 +32,13 @@ export class UserManager {
     public static checkPassword(username: string, password: string): Promise<boolean> {
         return UserModel
             .findOne({ username })
-            .then(user => bcrypt.compare(password, user.password));
+            .then(user => {
+                if (user) {
+                    return bcrypt.compare(password, user.password);
+                } else {
+                    return false;
+                }
+            });
     }
 
     public static getAllUsers(): Promise<IUserModel[]> {
