@@ -1,0 +1,26 @@
+<md-card>
+    <md-progress-bar [mode]="progressBarMode" id="login-form-progress-bar" *ngIf="showProgressBar" [color]="progressBarColor" value="100"></md-progress-bar>
+    <form #loginForm="ngForm" id="login-form" (ngSubmit)="login()" novalidate>
+        <md-card-header>
+            <md-card-title>
+                <h3>Please Sign In</h3>
+            </md-card-title>
+        </md-card-header>
+        <md-card-content>
+            <md-input-container>
+                <input mdInput placeholder="Username" type="text" name="username" [(ngModel)]="username" [errorStateMatcher]="invalidField">
+                <md-error>Username is required</md-error>
+            </md-input-container>
+            <md-input-container>
+                <input mdInput placeholder="Password" type="password" name="password" [(ngModel)]="password" [errorStateMatcher]="invalidField">
+                <md-error>Password is required</md-error>
+            </md-input-container>
+        </md-card-content>
+        <md-card-actions>
+            <button md-button id="signin-btn" type="submit">Sign In</button>
+        </md-card-actions>
+        <md-card-footer id="message" [ngClass]="{'error': messageType === 'error'}" *ngIf="message">
+            {{ message }}
+        </md-card-footer>
+    </form>
+</md-card>

@@ -1,0 +1,55 @@
+// Import theming functions
+@import '~@angular/material/theming';
+// Import your custom theme
+@import '../../app-theme.scss';
+
+md-card-footer.error {
+  background-color: mat-color($app-accent, A400);
+  color: $app-white;
+  padding: 5px;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+md-card {
+    margin: 10px;
+}
+
+md-card-header {
+    justify-content: center;
+    display: flex;
+}
+
+md-card-actions {
+    justify-content: flex-end;
+    display: flex;
+}
+
+#signin-btn {
+    width: 100%;
+}
+
+#login-form {
+    width: 300px;
+
+    md-input-container {
+        width: 100%;
+    }
+}
+
+#login-form-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#message {
+    text-align: center;
+}
