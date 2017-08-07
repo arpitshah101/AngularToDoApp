@@ -16,6 +16,8 @@ md-card-footer.error {
     align-items: center;
     width: 100%;
     height: 100%;
+
+    background: mat-color($app-primary, 200);
 }
 
 md-card {
